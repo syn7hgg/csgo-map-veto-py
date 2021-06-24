@@ -1,0 +1,15 @@
+{
+  "pool_name": "Wingman Active Map Pool",
+  "maps": [
+    "Calavera",
+    "Cobblestone",
+    "Inferno",
+    "Lake",
+    "Overpass",
+    "Pitstop",
+    "Shortdust",
+    "Shortnuke",
+    "Train",
+    "Vertigo"
+  ]
+}

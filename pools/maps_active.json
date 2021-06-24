@@ -1,0 +1,12 @@
+{
+  "pool_name": "Active Duty Map Pool",
+  "maps": [
+    "Inferno",
+    "Mirage",
+    "Nuke",
+    "Overpass",
+    "Dust 2",
+    "Vertigo",
+    "Ancient"
+  ]
+}
