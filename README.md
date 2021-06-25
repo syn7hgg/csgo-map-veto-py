@@ -19,13 +19,15 @@ pip install -r requirements.txt
 
 This will automatically install all required libraries and packages for you.
 
-The script is now all set and ready to go. Just run this command:
+The script is now all set and ready to go. Choose your OS and run the commands below.
+
+### Windows
 
 ```bash
 python main.py
 ```
 
-if you're on Windows. If that doesn't work or you're on Linux/Mac, the execute:
+### Linux / macOS
 
 ```bash
 python3 main.py
