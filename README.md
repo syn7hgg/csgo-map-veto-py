@@ -2,7 +2,6 @@
 
 [![](https://img.shields.io/github/issues/synth-dev/csgo-map-veto-py?style=flat-square)
 ](https://github.com/synth-dev/csgo-map-veto-py/issues)
-[![](https://img.shields.io/github/license/synth-dev/csgo-map-veto-py?style=flat-square)]()
 
 A command-line map veto system for CS:GO written in Python 3.
 
