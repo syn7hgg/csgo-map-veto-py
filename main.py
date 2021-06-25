@@ -39,6 +39,7 @@ def main():
     poolfiles = []
     i = 1
 
+    clear()
     l = Figlet('rectangles')
     txt = l.renderText('Map Veto by synth')
     print(Fore.RED + txt + Style.RESET_ALL)
@@ -133,6 +134,7 @@ def veto_bo1(maps):
             i += 1
         except ValueError:
             print(Fore.LIGHTRED_EX + "Invalid map." + Style.RESET_ALL)
+    clear()
     auto = choice(available)
     picked.append(auto)
     available.pop(available.index(auto))
@@ -153,8 +155,10 @@ def veto_bo3(maps):
     num_maps = len(maps)
     vetoed, picked = [], []
     i, p, v = 0, 0, True
-    while i < num_maps-3:
+    while i < num_maps-3 or len(list(filter(lambda x: x != "", picked))) < 2:
         clear()
+        print(i)
+        print(len(list(filter(lambda x: x != "", picked))))
         print(generate_table(available, vetoed, picked))
         if p % 2 == 0 and p == 0:
             print(t1, Fore.LIGHTRED_EX + "VETO" + Style.RESET_ALL + ": ", end="")
@@ -202,6 +206,7 @@ def veto_bo3(maps):
                 i += 1
             except ValueError:
                 print(Fore.LIGHTRED_EX + "Invalid map." + Style.RESET_ALL)
+    clear()
     auto = choice(available)
     picked.append(auto)
     available.pop(available.index(auto))
@@ -218,4 +223,5 @@ def veto_bo3(maps):
 
 data, best_of = main()
 veto(data, best_of)
-print("Application end. " + Fore.LIGHTMAGENTA_EX + "GLHF" + Style.RESET_ALL + "!")
+print(Fore.LIGHTCYAN_EX + "Good Luck, Have Fun." + Style.RESET_ALL)
+input()
