@@ -7,10 +7,11 @@ from random import choice
 from pyfiglet import Figlet
 from colorama import init, Fore, Back, Style
 from prettytable import PrettyTable
+from datetime import date, datetime
 
 init()
 
-t1, t2 = "Team 1", "Team 2"
+t1, t2, map_pool = "Team 1", "Team 2", ""
 
 
 def clear():
@@ -35,7 +36,7 @@ def resource_path(relative_path):
 
 
 def main():
-    global t1, t2
+    global t1, t2, map_pool
     poolfiles = []
     i = 1
 
@@ -67,6 +68,7 @@ def main():
     try:
         poolfile = poolfiles[pool - 1]
         poolmaps = json.load(open(poolfile))['maps']
+        map_pool = json.load(open(poolfile))['pool_name']
         return poolmaps, bo
     except IndexError:
         print('You might have chosen an invalid map file.')
@@ -102,12 +104,38 @@ def generate_table(ava, vet, pic):
     return table
 
 
+def log_result(picks, bo):
+    global t1, t2, map_pool
+    today = date.today()
+    now = datetime.now()
+    datestr = today.strftime("%d-%m-%Y")
+    file = open(resource_path('logs/log_' + datestr + '.log'), 'a')
+    pickstr = ""
+    if len(picks) == 1:
+        pickstr = str(picks[0])
+    else:
+        i = 1
+        for x in picks:
+            if i == len(picks):
+                pickstr += str(x)
+            else:
+                pickstr += str(x) + ';'
+            i += 1
+    dt_string = now.strftime("%d/%m/%Y %H:%M:%S")
+    line = dt_string+' => Bo'+str(bo)+', '+t1+' vs '+t2+', '+map_pool+', '+pickstr+'\n'
+    file.write(line)
+    file.close()
+    return True
+
+
 def veto(maps, bo):
     # Execute veto
+    picks = []
     if bo == 1:
-        veto_bo1(maps)
+        picks = veto_bo1(maps)
     elif bo == 3:
-        veto_bo3(maps)
+        picks = veto_bo3(maps)
+    return log_result(picks, bo)
 
 
 def veto_bo1(maps):
@@ -222,6 +250,8 @@ def veto_bo3(maps):
 
 
 data, best_of = main()
-veto(data, best_of)
+logged = veto(data, best_of)
+if logged:
+    print(Fore.LIGHTGREEN_EX + "Logged succesfully." + Style.RESET_ALL)
 print(Fore.LIGHTCYAN_EX + "Good Luck, Have Fun." + Style.RESET_ALL)
 input()
